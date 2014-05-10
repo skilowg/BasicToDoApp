@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose')
 
-mongoose.connect('mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu')
+mongoose.connect('mongodb://name:pass@novus.modulusmongo.net:27017/quWov8eg')
 
 app.set(function() {
   app.use(express.static(__dirname + '/public'));
@@ -13,7 +13,11 @@ app.set(function() {
 
 var Todo = mongoose.model('Todo', {
   text : String
-})
+});
+
+app.get('*', function(req, res) {
+  res.sendfile('./public/index.html');
+});
 
 app.listen(8080);
 console.log("App listening on port 8080");
@@ -22,7 +26,7 @@ app.get('/api/todos', function(req, res) {
   Todo.find(function(err, todos) {
     if (err)
       res.send(err)
-      res.json(todos);
+    res.json(todos);
   });
 });
 
